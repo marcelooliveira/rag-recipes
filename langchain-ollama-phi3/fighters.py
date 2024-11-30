@@ -1,14 +1,15 @@
 from langchain.document_loaders import TextLoader
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.llms import Ollama
+# from langchain.llms import Ollama
+from langchain_ollama import OllamaLLM
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.prompts import PromptTemplate
 import os
 
 # Step 1: Load and preprocess the Markdown file
-file_path = "stock.md"
+file_path = "fighters.md"
 if not os.path.exists(file_path):
     raise FileNotFoundError(f"The file {file_path} does not exist.")
 
@@ -38,7 +39,7 @@ short_answer_prompt = PromptTemplate(
 
 # Set up Retrieval-Augmented Generation (RAG) with the custom prompt
 retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 3})
-llm = Ollama(model="phi3", temperature=0.0)  # Deterministic and precise
+llm = OllamaLLM(model="phi3", temperature=0.0)  # Deterministic and precise
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
     retriever=retriever,
@@ -54,7 +55,7 @@ def ask_question(qa_chain):
         print("Goodbye!")
         return False
     try:
-        response = qa_chain({"query": query})
+        response = qa_chain.invoke({"query": query})
         answer = response["result"]
         sources = response["source_documents"]
         
@@ -69,8 +70,8 @@ def ask_question(qa_chain):
     return True
 
 def main():
-    print("Stock Query Assistant")
-    print("Ask any question about the stock stats in 'stock.md' or type 'exit' to quit.")
+    print("Query Assistant")
+    print("Ask any question about the table or type 'exit' to quit.")
     while True:
         continue_session = ask_question(qa_chain)
         if not continue_session:

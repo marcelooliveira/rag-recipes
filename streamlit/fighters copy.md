@@ -1,6 +1,6 @@
 | Fighter | Year | Weight | Speed | Manufacturer      | Active Units |
 |---------|------|--------|-------|-------------------|--------------|
-| F-22    | 1997 |  43340 |  1500 | Lockheed Martin   |           33 |
+| F-22    | 1997 |  43340 |  1500 | Lockheed Martin   |          33  |
 | F-35    | 2006 |  49540 |  1200 | Lockheed Martin   |          100 |
 | F-16    | 1974 |  18900 |  1500 | General Dynamics  |          860 |
 | F-15    | 1972 |  44500 |  1875 | McDonnell Douglas |          200 |

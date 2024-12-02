@@ -9,7 +9,7 @@ from langchain.prompts import PromptTemplate
 import os
 
 # Step 1: Load and preprocess the Markdown file
-file_path = "fighters.md"
+file_path = "f1.md"
 if not os.path.exists(file_path):
     st.error(f"The file {file_path} does not exist.")
     st.stop()
@@ -72,7 +72,7 @@ qa_chain = RetrievalQA.from_chain_type(
 
 # Step 4: Streamlit Interface
 st.title("Military Aircraft Data Assistant")
-st.write("Ask any question about the data in `fighters.md`. Use the form below to submit your query.")
+st.write("Ask any question about the data in `f1.md`. Use the form below to submit your query.")
 
 # Streamlit form for user input
 with st.form(key="query_form"):
